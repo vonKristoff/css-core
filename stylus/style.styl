@@ -1,6 +1,16 @@
 @import 'nib'
 
-global-reset()
+@import "core/vars"
+@import "core/type"
+@import "core/media-queries"
 
-*, *:before, *:after
-  box-sizing border-box
+// style mixins
+@import "mixins/flexbox"
+@import "mixins/images"
+
+// core layout
+@import "layout/base"
+@import "layout/sections"
+
+// content blocks
+@import "pages/root"

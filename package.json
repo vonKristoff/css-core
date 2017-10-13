@@ -37,19 +37,23 @@
     "package": "NODE_ENV=production rollup --config rollup.config.package.js",
     "production": "NODE_ENV=production rollup -c",
     "server:watch": "browser-sync start -s 'public' --port 3000 --cors -f 'public'",
-    "listen:js": "onchange 'js/**/*.js' -- npm run compile:bundle",
-    "listen:views": "onchange 'jade/views/**/*.jade' -- npm run compile:pages",
+    "listen:app": "onchange 'js/app/*.js' -- npm run compile:bundle",
+    "listen:js": "onchange 'js/*.js' -- parallelshell 'echo rollup view {{changed}}' 'rollup -c -i {{changed}} -o public/{{changed}}'",
+    "listen:views": "onchange 'jade/**/*.jade' -- npm run compile:pages",
     "listen:templates": "onchange jade/components/**/*.jade -- npm run compile:templates",
     "listen:stylus": "onchange 'stylus/**/*.styl' -- npm run compile:css",
+    "listen:critical": "onchange 'stylus/critical.styl' -- npm run compile:critical",
     "precompile:js": "jshint --reporter=node_modules/jshint-stylish/stylish js/.; exit 0",
     "compile:bundle": "rollup -c",
     "compile:css": "stylus -u nib stylus/style.styl -o public/style.css",
+    "compile:critical": "stylus -u nib stylus/critical.styl -o jade/partials/critical.css",
     "build:css": "stylus -u nib stylus/style.styl -o stylus/style.css",
     "postbuild:css": "purifycss stylus/style.css public/index.html --info --out public/style.css",
     "compile:templates": "jade jade/components -o js/templates/",
     "compile:pages": "jade jade/views -H -o public/"
   },
   "dependencies": {
+    "fg-loadcss": "^1.3.1",
     "vue": "latest"
   }
 }
