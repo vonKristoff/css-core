@@ -1,0 +1,35 @@
+$max-width = 1180px
+$padding = 2em
+$padding-x = 0 2em
+
+section
+  [class^="base"]
+    background-color inherit
+    width 100%
+    height auto
+  .base
+    &--banner
+      background: green
+      height 50vh
+
+section
+  [class^="layout"]
+    width 100%
+    margin 0 auto
+  .layout
+    &--wide
+      max-width $max-width
+    &--centered
+      flex-centered()
+
+section
+  [class^="content"]
+    padding $padding-x
+    &.has-img
+      bg-contain()
+  .content
+    &--columns
+      padding 0
+      flex-columns()
+
+

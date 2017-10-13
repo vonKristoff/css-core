@@ -1,0 +1,71 @@
+/**
+* Media queries
+**/
+_mq-widescreen = 1440
+_mq-desktop = 1280
+_mq-notebook = 960
+_mq-tablet = 768
+_mq-mobile = 600
+/**
+* helper variables
+**/
+$widescreen = _mq-widescreen + "px"
+$desktop = _mq-desktop + "px"
+$notebook = _mq-notebook + "px"
+$tablet = _mq-tablet + "px"
+$mobile = _mq-mobile + "px"
+/**
+* Fluid fonts mixin
+**/
+fontsize(max, min, toWidth, fromWidth)
+  font-ratio = "calc(%s / %s * 100%)" % (max min)
+  font-difference = max - min
+  width-difference = toWidth - fromWidth
+  font-size "calc(%s + %s * (100vw - %spx) / %s)" % (font-ratio font-difference toWidth width-difference)
+
+/**
+* Media queries with fluid font-sizes
+**/
+
+widescreen()
+  @media (min-width: $widescreen)
+    fontsize(_font-widescreen, _font-desktop, _mq-widescreen, _mq-desktop)
+    {block}
+
+desktop()
+  @media (min-width: $desktop)
+    fontsize(_font-desktop, _font-notebook, _mq-desktop, _font-notebook)
+    {block}
+
+notebook()
+  @media (min-width: $notebook)
+    fontsize(_font-notebook, _font-tablet, _mq-notebook, _mq-tablet)
+    {block}
+
+tablet() 
+  @media (min-width: $tablet) 
+    fontsize(_font-tablet, _font-mobile, _mq-tablet, _mq-mobile)
+    {block}
+
+/**
+* Base mobile queries
+**/
+
+mobile()
+  @media (min-width: $mobile) 
+    {block}
+
+mobile-landscape()
+  @media (max-height: $mobile) 
+    {block}
+
+/**
+* Custom mixins
+**/
+mq-max(width)
+  @media (max-width: width) 
+    {block}
+
+mq-min(width)
+  @media (min-width: width) 
+    {block}
