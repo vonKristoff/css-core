@@ -6,21 +6,14 @@ _mq-desktop = 1280
 _mq-notebook = 960
 _mq-tablet = 768
 _mq-mobile = 600
-/**
-* helper variables
-**/
-$widescreen = _mq-widescreen + "px"
-$desktop = _mq-desktop + "px"
-$notebook = _mq-notebook + "px"
-$tablet = _mq-tablet + "px"
-$mobile = _mq-mobile + "px"
+
 /**
 * Fluid fonts mixin
 **/
 fontsize(max, min, toWidth, fromWidth)
   font-ratio = "calc(%s / %s * 100%)" % (max min)
   font-difference = max - min
-  width-difference = toWidth - fromWidth
+  width-difference = ~~(toWidth) - fromWidth
   font-size "calc(%s + %s * (100vw - %spx) / %s)" % (font-ratio font-difference toWidth width-difference)
 
 /**
@@ -28,22 +21,22 @@ fontsize(max, min, toWidth, fromWidth)
 **/
 
 widescreen()
-  @media (min-width: $widescreen)
+  @media (min-width: unit(_mq-widescreen,'px'))
     fontsize(_font-widescreen, _font-desktop, _mq-widescreen, _mq-desktop)
     {block}
 
 desktop()
-  @media (min-width: $desktop)
+  @media (min-width: unit(_mq-desktop, 'px'))
     fontsize(_font-desktop, _font-notebook, _mq-desktop, _font-notebook)
     {block}
 
 notebook()
-  @media (min-width: $notebook)
+  @media (min-width: unit(_mq-notebook, 'px'))
     fontsize(_font-notebook, _font-tablet, _mq-notebook, _mq-tablet)
     {block}
 
 tablet() 
-  @media (min-width: $tablet) 
+  @media (min-width: unit(_mq-tablet, 'px')) 
     fontsize(_font-tablet, _font-mobile, _mq-tablet, _mq-mobile)
     {block}
 

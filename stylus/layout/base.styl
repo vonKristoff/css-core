@@ -1,34 +1,12 @@
-global-reset()
-
-*, *:before, *:after
-  box-sizing border-box
-
-$font-wide = 22px
-$font-standard = 18px
-
-// widescreen()
-//   @media (min-width: 1520px + 1)
-//     {block}
-
-// desktop()
-//   @media (min-width: 1080px + 1)
-//     {block}
-
-// fontsize(max, min, toWidth, fromWidth)
-//   font-ratio = "calc(%s / %s * 100%)" % (max min)
-//   font-difference = max - min
-//   width-difference = toWidth - fromWidth
-//   font-size "calc(%s + %s * (100vw - %spx) / %s)" % (font-ratio font-difference toWidth width-difference)
-
+/**
+ * Core HTML elements
+ */
 html
   font-size 100%
   overflow-x hidden
   max-width 100%
-  +widescreen()
-    h1
-      font-size: 28px
-    p
-      font-size: 1em !important
-      color red !important
-  +fontsize(28, 16, 1520, 1080)
-  // font-size: calc(112.5% + 4 * (100vw - 1080px) / 400)
+  mobile()
+  tablet()
+  notebook()
+  desktop()
+  widescreen()
